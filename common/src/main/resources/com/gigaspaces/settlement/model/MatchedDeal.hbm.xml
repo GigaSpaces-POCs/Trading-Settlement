@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class
+        name="com.gigaspaces.settlement.model.MatchedDeal"
+        table="matched_deal"
+        mutable="true">
+
+        <id
+            name="dealId"
+            column="deal_ID"
+            type="java.lang.String">
+            
+            <generator class="assigned">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Account.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="buySideEntity"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="buy_side_entity"
+        />
+
+        <property
+            name="sellSideEntity"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="sell_side_entity"
+        />
+        
+        <property
+            name="instrument"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="instrument"
+        />
+        
+        <property
+            name="buySideAccount"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="buy_side_account"
+        />
+        
+        <property
+            name="sellSideAccount"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="sell_side_account"
+        />
+        
+        
+        <property
+            name="buySideAmount"
+            type="java.lang.Double"
+            update="true"
+            insert="true"
+            column="buy_side_amount"
+        />
+        
+        <property
+            name="sellSideAmount"
+            type="java.lang.Double"
+            update="true"
+            insert="true"
+            column="sell_side_amount"
+        />
+
+        <property
+            name="valueDate"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="value_date"
+        />
+        
+        <property
+            name="routing"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="ROUTING"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-Account.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

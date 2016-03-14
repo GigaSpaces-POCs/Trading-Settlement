@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:os-core="http://www.openspaces.org/schema/core" xmlns:os-events="http://www.openspaces.org/schema/events"
+	xmlns:os-remoting="http://www.openspaces.org/schema/remoting"
+	xmlns:os-sla="http://www.openspaces.org/schema/sla" xmlns:os-jms="http://www.openspaces.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans file:///C:/XMLDef/spring-4.1/spring-beans-4.1.xsd
+       http://www.springframework.org/schema/context file:///C:/XMLDef/spring-4.1/spring-context-4.1.xsd
+       http://www.openspaces.org/schema/core file:///C:/XMLDef/gs-10.2/openspaces-core.xsd
+       http://www.openspaces.org/schema/events file:///C:/XMLDef/gs-10.2/openspaces-events.xsd
+       http://www.openspaces.org/schema/remoting file:///C:/XMLDef/gs-10.2/openspaces-remoting.xsd
+       http://www.openspaces.org/schema/jms file:///C:/XMLDef/gs-10.2/openspaces-jms.xsd
+       http://www.openspaces.org/schema/sla file:///C:/XMLDef/gs-10.2/openspaces-sla.xsd">
+
+
+	<!-- Spring property configured which allows us to use system properties 
+		(such as user.name). -->
+	<bean id="propertiesConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="properties">
+			<props>
+				<prop key="numberOfTypes">100</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- A bean representing a space (an IJSpace implementation). Note, we perform 
+		a lookup on the space since we are working against a remote space. -->
+	<os-core:space id="space" url="jini://*/*/settlementSpace"/>	
+
+	<!-- OpenSpaces simplified space API built on top of IJSpace/JavaSpace. -->
+	<os-core:giga-space id="gigaSpace" space="space" />
+	
+	<!-- Support @RemotingService component scanning -->
+	<context:component-scan base-package="com.gigaspaces.settlement" />
+	<context:annotation-config />
+	<!-- Enable support for @Notify annotation -->
+	<os-events:annotation-support />
+
+	<!-- Enables the usage of @GigaSpaceContext annotation based injection. -->
+	<os-core:giga-space-context />
+
+	<os-core:annotation-support />
+</beans>

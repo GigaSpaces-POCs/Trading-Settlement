@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:os-core="http://www.openspaces.org/schema/core" xmlns:os-events="http://www.openspaces.org/schema/events"
+	xmlns:os-remoting="http://www.openspaces.org/schema/remoting"
+	xmlns:os-sla="http://www.openspaces.org/schema/sla" xmlns:os-jms="http://www.openspaces.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans file:///C:/XMLDef/spring-4.1/spring-beans-4.1.xsd
+       http://www.springframework.org/schema/context file:///C:/XMLDef/spring-4.1/spring-context-4.1.xsd
+       http://www.openspaces.org/schema/core file:///C:/XMLDef/gs-10.2/openspaces-core.xsd
+       http://www.openspaces.org/schema/events file:///C:/XMLDef/gs-10.2/openspaces-events.xsd
+       http://www.openspaces.org/schema/remoting file:///C:/XMLDef/gs-10.2/openspaces-remoting.xsd
+       http://www.openspaces.org/schema/jms file:///C:/XMLDef/gs-10.2/openspaces-jms.xsd
+       http://www.openspaces.org/schema/sla file:///C:/XMLDef/gs-10.2/openspaces-sla.xsd">
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<!-- <value>classpath:gs-app.properties</value> -->
+			</list>
+		</property>
+	</bean>
+
+	<os-core:distributed-tx-manager id="transactionManager" />
+
+	<os-core:space id="space" url="/./settlementSpace" mirror="true">
+		<os-core:properties>
+			<props>
+				<prop key="space-config.QueryProcessor.date_format">MM/dd/yyyy HH:mm:ss</prop>
+				<prop key="space-config.QueryProcessor.time_format">HH:mm:ss</prop>
+				<prop key="cluster-config.groups.group.fail-over-policy.active-election.yield-time">200</prop>
+				<prop key="cluster-config.groups.group.fail-over-policy.active-election.fault-detector.invocation-delay">50</prop>
+				<prop key="cluster-config.groups.group.fail-over-policy.active-election.fault-detector.retry-count">2</prop>
+			
+			</props>
+		</os-core:properties>
+	</os-core:space>
+
+	<os-core:giga-space id="gigaSpace" space="space"
+		tx-manager="transactionManager" default-isolation="READ_COMMITTED" />
+		
+		
+
+	<!-- Annotations -->
+	<context:component-scan base-package="com.gigaspaces.settlement" />
+	<context:annotation-config />
+
+	<!-- Enables the usage of @GigaSpaceContext annotation based injection. -->
+	<os-core:giga-space-context />
+
+	<!-- Support the @RemotingService annotation on a service -->
+	<os-remoting:annotation-support />
+	<os-core:annotation-support />
+	<os-events:annotation-support />
+	
+	<os-remoting:service-exporter id="serviceExporter" />
+
+	<bean id="settlementAppDAO"
+		class="com.gigaspaces.settlement.model.dao.gigaspaces.SettlementAppDAOGigaSpaces" />
+
+</beans>

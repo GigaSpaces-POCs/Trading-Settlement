@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class
+        name="com.gigaspaces.settlement.model.Trade"
+        table="TRADE"
+        mutable="true">
+
+        <id
+            name="tradeId"
+            column="TRADE_ID"
+            type="java.lang.String">
+            
+            <generator class="assigned">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Account.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="tradingParty"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="trading_party"
+        />
+
+        <property
+            name="counterparty"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="counterparty"
+        />
+
+        <property
+            name="instrument"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="instrument"
+        />
+        
+        <property
+            name="buySellFlag"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="buy_sell_flag"
+        />
+        
+        <property
+            name="account"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="account"
+        />
+        
+        <property
+            name="amount"
+            type="java.lang.Double"
+            update="true"
+            insert="true"
+            column="amount"
+        />
+
+        <property
+            name="processed"
+            type="yes_no"
+            update="true"
+            insert="true"
+            column="processed"
+        />
+
+        <property
+            name="valueDate"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="value_date"
+        />
+
+        <property
+            name="tradeDate"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="trade_date"
+        />
+        
+        <property
+            name="routing"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            column="ROUTING"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-Account.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

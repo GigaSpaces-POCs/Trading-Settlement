@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:os-core="http://www.openspaces.org/schema/core" xmlns:os-events="http://www.openspaces.org/schema/events"
+	xmlns:os-remoting="http://www.openspaces.org/schema/remoting"
+	xmlns:os-sla="http://www.openspaces.org/schema/sla" xmlns:os-jms="http://www.openspaces.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans file:///C:/XMLDef/spring-4.1/spring-beans-4.1.xsd
+       http://www.springframework.org/schema/context file:///C:/XMLDef/spring-4.1/spring-context-4.1.xsd
+       http://www.openspaces.org/schema/core file:///C:/XMLDef/gs-10.2/openspaces-core.xsd
+       http://www.openspaces.org/schema/events file:///C:/XMLDef/gs-10.2/openspaces-events.xsd
+       http://www.openspaces.org/schema/remoting file:///C:/XMLDef/gs-10.2/openspaces-remoting.xsd
+       http://www.openspaces.org/schema/jms file:///C:/XMLDef/gs-10.2/openspaces-jms.xsd
+       http://www.openspaces.org/schema/sla file:///C:/XMLDef/gs-10.2/openspaces-sla.xsd">
+
+	<!--
+		Spring property configurer which allows us to use system properties
+		(such as user.name).
+	
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:sc.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	-->
+
+	<!-- Support Gigaspace annotation -->
+	<context:annotation-config />
+	<os-core:annotation-support />
+		
+	<!--
+        Enables the usage of @GigaSpaceContext annotation based injection.
+	-->
+  	<os-core:giga-space-context/>
+
+	<os-core:space id="space" url="jini://*/*/settlementSpace">
+		<os-core:properties>
+			<props>
+				<prop key="space-config.QueryProcessor.date_format">EEE MMM dd HH:mm:ss zzz yyyy</prop>
+				<prop key="space-config.QueryProcessor.time_format">HH:mm:ss</prop>
+			</props>
+		</os-core:properties>
+	</os-core:space>
+
+	<os-core:giga-space id="gigaSpace" space="space" />
+	
+	<os-core:space id="tradeFeederSpace" url="jini://*/*/feederSpace"/>
+	<os-core:giga-space id="tradeFeederGigaSpace" space="tradeFeederSpace"/>
+
+	<bean id="settlementAppServiceReducer" class="com.gigaspaces.settlement.SettlementAppServiceReducer" />
+
+	<os-remoting:executor-proxy id="settlementAppServiceDistributed"
+		giga-space="gigaSpace" interface="com.gigaspaces.settlement.SettlementAppService"
+		timeout="240000" broadcast="true" return-first-result="false" >
+		<os-remoting:result-reducer ref="settlementAppServiceReducer"/>
+	</os-remoting:executor-proxy>
+	
+	<os-remoting:executor-proxy id="settlementAppServiceRouted"
+		giga-space="gigaSpace" interface="com.gigaspaces.settlement.SettlementAppService"
+		timeout="240000" />
+		
+	<os-remoting:executor-proxy id="tradeFeederService"
+		giga-space="tradeFeederGigaSpace" interface="com.gigaspaces.settlement.TradeFeederService"
+		timeout="240000" />
+	
+	<bean id="contextApplicationContextProvider" class="com.gigaspaces.settlement.web.blotter.server.ApplicationContextProvider"/>
+	
+</beans>

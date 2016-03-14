@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>com.gigaspaces.settlement</groupId>
+        <artifactId>settlement-app</artifactId>
+		<version>1.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.gigaspaces.settlement.web</groupId>
+	<artifactId>gwt-blotter-web</artifactId>
+	<packaging>war</packaging>
+	<version>1.0</version>
+	<name>deals blotter Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+				
+		<dependency>
+		    <groupId>com.google.code.gwt-log</groupId>
+		    <artifactId>gwt-log</artifactId>
+		    <version>2.6.2</version>
+		</dependency>
+		 		
+		<dependency>
+		    <groupId>com.google.gwt</groupId>
+		    <artifactId>gwt-api-checker</artifactId>
+		    <version>2.0.0</version>
+		</dependency>
+
+
+		<dependency>
+		    <groupId>com.google.gwt</groupId>
+		    <artifactId>gwt-servlet</artifactId>
+		    <version>2.0.4</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.google.gwt</groupId>
+		    <artifactId>gwt-soyc-vis</artifactId>
+		    <version>2.0.4</version>
+		</dependency>
+			
+		<dependency>
+		    <groupId>com.google.gwt</groupId>
+		    <artifactId>gwt-user</artifactId>
+		    <version>2.0.4</version>
+		</dependency>
+				
+		<dependency>
+		  <groupId>com.smartgwt</groupId>
+		  <artifactId>smartgwt</artifactId>
+		  <version>2.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.gigaspaces.settlement</groupId>
+			<artifactId>common</artifactId>
+			<version>1.0</version>
+		</dependency>
+			
+	</dependencies>
+		
+	<build>
+		<finalName>gwt-dealsBlotter</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<appendAssemblyId>false</appendAssemblyId>
+					<attach>false</attach>
+					<ignoreDirFormatExtensions>true</ignoreDirFormatExtensions>
+					<descriptors>
+						<descriptor>src/main/assembly/assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<style>DETAILED</style>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.0.1.v20110908</version>
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webAppConfig>
+                        <contextPath>/gs-rest-example</contextPath>
+                    </webAppConfig>
+                </configuration>
+            </plugin>
+		</plugins>
+	</build>
+</project>

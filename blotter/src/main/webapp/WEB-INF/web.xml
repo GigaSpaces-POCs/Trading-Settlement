@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "file:\\\C:\XMLDef\java\web-app_2_3.dtd">
+
+<web-app>
+  
+  <servlet>
+    <servlet-name>dealManagerServlet</servlet-name>
+    <servlet-class>com.gigaspaces.settlement.web.blotter.server.manager.DealManagerImpl</servlet-class>    				
+  </servlet>
+  
+  <servlet>
+    <servlet-name>loginManagerServlet</servlet-name>
+    <servlet-class>com.gigaspaces.settlement.web.blotter.server.manager.LoginManagerImpl</servlet-class>    				
+  </servlet>
+
+   
+  <servlet-mapping>
+    <servlet-name>dealManagerServlet</servlet-name>
+    <url-pattern>/gwtblotter/dealManager</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>loginManagerServlet</servlet-name>
+    <url-pattern>/gwtblotter/loginManager</url-pattern>
+  </servlet-mapping>
+
+
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>Blotter.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>
