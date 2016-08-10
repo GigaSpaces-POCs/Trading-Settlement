@@ -1,5 +1,7 @@
 package com.gigaspaces.settlement;
 
+import javax.annotation.PostConstruct;
+
 import org.openspaces.remoting.ExecutorProxy;
 import org.openspaces.remoting.RemotingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +57,15 @@ public class TradeFeederServiceImpl implements TradeFeederService {
 	@Override
 	public void stopFeeder() throws Exception {
 		getTradeFeeder().stopFeeder();
+	}
+	
+	@PostConstruct
+	public void startFeeder () {
+		try {
+			startFeeder(5000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

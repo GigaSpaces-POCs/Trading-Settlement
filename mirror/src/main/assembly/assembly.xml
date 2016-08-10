@@ -33,6 +33,7 @@
 				<include>org.slf4j:slf4j-api</include>
 				<include>org.jboss.logging:jboss-logging</include>
 				<include>ojdbc:ojdbc</include>
+				<include>org.hsqldb:hsqldb</include>
 			</includes>
 		</dependencySet>
 	</dependencySets>

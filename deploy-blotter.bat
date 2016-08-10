@@ -1,3 +1,3 @@
 call setExampleEnv.bat
 
-%JSHOMEDIR%\bin\gs.bat deploy blotter\.target\gwt-dealsBlotter.war
+%JSHOMEDIR%\bin\gs.bat deploy gwt-blotter-web\.target\gwt-dealsBlotter.war
