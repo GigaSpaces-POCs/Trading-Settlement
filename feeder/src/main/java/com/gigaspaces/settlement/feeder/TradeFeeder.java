@@ -34,15 +34,20 @@ public class TradeFeeder implements DisposableBean {
 	}
 	
 	public void startFeeder(int intervalInMilliseconds) {
+		LOG.info("---startFeeder Called---");
 		if (feederTask == null || !feederThread.isAlive()) {
+			LOG.info("---startFeeder Called new feederTask created with intervalInMilliseconds="+ intervalInMilliseconds +".---");
 			feederTask = new FeederTask();
 			feederThread = new Thread(feederTask);
 			feederThread.start();
+		} else {
+			LOG.info("---startFeeder Called existing feederTask used with intervalInMilliseconds="+ intervalInMilliseconds +".---");
 		}
 		feederTask.setInterval(intervalInMilliseconds);
 	}
 
 	public void stopFeeder() {
+		LOG.info("---stopFeeder Called---");
 		feederTask.cancel();
 	}
 

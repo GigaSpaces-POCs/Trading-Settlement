@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gigaspaces.settlement.TradeFeederService;
 
-public class TradeFeederJMXMonitor implements ITradeFeederJMXMonitor,DynamicMBean ,InitializingBean,DisposableBean{
+public class TradeFeederJMXMonitor implements DynamicMBean ,InitializingBean,DisposableBean{
 	
 	@Autowired
 	private TradeFeederService tradeFeederService;

@@ -32,7 +32,7 @@
 	</repositories>
 	<packaging>pom</packaging>
 	<properties>
-		<gsVersion>10.2.0-13800-RELEASE</gsVersion>
+		<gsVersion>10.1.1-12800-RELEASE</gsVersion>
 		<springVersion>4.1.1.RELEASE</springVersion>
 	</properties>
 	<modules>
@@ -42,7 +42,7 @@
 		<module>monitor</module>
 		<module>messaging</module>
 		<module>mirror</module>
-		<module>blotter</module>
+		<module>gwt-blotter-web</module>
 		<module>startup</module>
 	</modules>
 	<dependencies>
@@ -124,24 +124,30 @@
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.8.0</version>
 		</dependency>
-	<dependency>
-		<groupId>org.hsqldb</groupId>
-		<artifactId>hsqldb</artifactId>
-		<version>2.3.2</version>
-		<scope>compile</scope>
-	</dependency>
-	<dependency>
-	  <groupId>org.slf4j</groupId>
-	  <artifactId>slf4j-api</artifactId>
-	  <version>1.6.4</version>
-	  <scope>compile</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-compiler-plugin</artifactId>
-		<version>3.3</version>
-		<type>maven-plugin</type>
-	</dependency>
+		<dependency>
+		   <groupId>com.sun</groupId>
+		   <artifactId>tools</artifactId>
+		   <version>1.6.0</version>
+		   <scope>system</scope>
+		   <systemPath>${env.JAVA_HOME}/lib/tools.jar</systemPath>
+		 </dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.slf4j</groupId>
+		  <artifactId>slf4j-api</artifactId>
+		  <version>1.6.4</version>
+		  <scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.3</version>
+			<type>maven-plugin</type>
+		</dependency>
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>

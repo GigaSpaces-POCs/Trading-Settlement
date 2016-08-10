@@ -1,0 +1,5 @@
+.target/
+*.rar
+.classpath
+.project
+.settings/
