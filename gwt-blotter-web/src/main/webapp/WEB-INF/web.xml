@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+	      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	      version="3.0">
+  
+  <servlet>
+    <servlet-name>dealManagerServlet</servlet-name>
+    <servlet-class>com.gigaspaces.settlement.web.blotter.server.manager.DealManagerImpl</servlet-class>    				
+  </servlet>
+  
+  <servlet>
+    <servlet-name>loginManagerServlet</servlet-name>
+    <servlet-class>com.gigaspaces.settlement.web.blotter.server.manager.LoginManagerImpl</servlet-class>    				
+  </servlet>
+
+   
+  <servlet-mapping>
+    <servlet-name>dealManagerServlet</servlet-name>
+    <url-pattern>/gwtblotter/dealManager</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>loginManagerServlet</servlet-name>
+    <url-pattern>/gwtblotter/loginManager</url-pattern>
+  </servlet-mapping>
+
+
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>Blotter.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>
